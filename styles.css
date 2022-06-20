@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+body {
+    background-color: #EEF9BF;
+    font-family: 'Russo One', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 56px;
+    color: #75B79E;
+    font-weight: bold;
+    text-align: center;
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+.cronometro {
+    width: 45%;
+    height: 30px;
+    text-align: center;
+    margin-top: -20px;
+    box-sizing: border-box;
+
+}
+.conteudo {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.conteudo img {  
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+}
+
+.conteudo > div {
+    width: 117px;
+    height: 146px;
+    position: relative;
+    margin: 17px;
+}
+
+.fundo {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 5px;
+    border: solid #99CEA8 1px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+
+.macaco {
+    transform: rotateY(180deg);
+  }
+
+  .imggif-gira {
+    transform: rotateY(-180deg);
+  }
+
+
+@media (max-width: 614px){
+    h1{
+        font-size: 36px;
+    }
+
+}
+
+@media (max-width: 336px){
+    h1{
+        font-size: 36px;
+    }
+}
