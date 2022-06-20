@@ -63,16 +63,44 @@ h1 {
     backface-visibility: hidden;
     transition: all .5s;
     transform-style: preserve-3d;
+    cursor: pointer;
+  }
+.fundo:hover {
+    background-color: #99CEA8;
   }
 
 .macaco {
     transform: rotateY(180deg);
   }
 
-  .imggif-gira {
+.imggif-gira {
     transform: rotateY(-180deg);
   }
 
+.escondido {
+    display: none;
+}
+.jogardenovo {
+    width: 200px;
+    height: 80px;
+    font-size: 40px;
+    background-color: #A7E9AF;
+    border-radius: 5px;
+    border: solid #99CEA8 1px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    cursor: pointer;
+}
+.jogardenovo:hover {
+    background-color: #99CEA8;
+}
+.jogardenovo p {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (max-width: 614px){
     h1{

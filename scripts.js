@@ -6,7 +6,10 @@ let imggif=[`img src="img/1.gif"`,
     `img src="img/5.gif"`,
     `img src="img/6.gif"`,
     `img src="img/7.gif"`];
-      
+    imggif.sort(comparador);
+    function comparador() { 
+        return Math.random() - 0.5; 
+    }
 
 function preparaojogo(){
 
@@ -56,29 +59,32 @@ preparaojogo(); /*chamando a função para iniciar assim que carrega o site*/
 /* COLOCANDO AS REGRAS NO JOGO */
 let comparacartas = []
 let limite = 0;
+let clicks = 0;
 
 function clicandonascartas(elemento) {
     
     atras = elemento.querySelector("div:nth-child(1)")
     frente = elemento.querySelector("div:nth-child(2)")
     limite++;
-    console.log(limite);
+    
 
     /* (se a carta ainda estiver virada para baixo */
     if (frente.classList.contains("macaco") && limite<3) { 
             atras.classList.add("imggif-gira")
             frente.classList.remove("macaco")
-            encontraropar(elemento);      
+            encontraropar(elemento);
+            clicks++;
+            console.log(clicks);
     }
 }
 
-contador = 0;
-
+segundos = 0;
+minutos = 0;
 
 cartasNaoViradas = cartas.querySelectorAll(".class-carta.sempar");
 
 function encontraropar(elemento) {
-    if(contador==0){
+    if(segundos==0){
         cronometro()
     }
     
@@ -90,11 +96,6 @@ function encontraropar(elemento) {
             for(i=0; i<cartasNaoViradas.length; i++) {
                 if(cartasNaoViradas[i].innerHTML == comparacartas[0]) {
                     cartasNaoViradas[i].classList.remove("sempar");
-                    
-                }
-
-                if(cartasNaoViradas.length == 0){
-                    stopCount();
                 }
             }
             comparacartas=[];
@@ -123,38 +124,45 @@ function errou() {
         limite = 0;
     }
 }
-
-
+teste=0;
 function vitoria() { 
-    if(cartasNaoViradas.length === 0) {
-        alert(`Parabéns! Você ganhou em ${contador-1} segundos`);
-
-    // let resposta = prompt("Você quer jogar novamente?")
-    // if(resposta == 'sim'){
-    //     cartas.innerHTML = ""
-    //     contador = 0
-    //     contador = 0
-    //     let imggif=[`img src="img/unicornparrot.gif" alt="unicornparrot"`,
-    //     `img src="img/bobrossparrot.gif" alt="bobrossparrot"`,
-    //     `img src="img/explodyparrot.gif" alt="explodyparrot"`,
-    //     `img src="img/fiestaparrot.gif" alt="fiestaparrot"`,
-    //     `img src="img/metalparrot.gif" alt="metalparrot"`,
-    //     `img src="img/revertitparrot.gif" alt="revertitparrot"`,
-    //     `img src="img/tripletsparrot.gif" alt="tripletsparrot"`]
-    //     setTimeout(preparaojogo, 1000)
-    // }else if(resposta == 'não'){Window.close()}
-    // else{
-    //     resposta = prompt("Você quer jogar novamente? Responda sim ou não")    
-    //     }
+    if(cartasNaoViradas.length == 0 && teste==0) {
+        alert(`Você ganhou com ${clicks} jogadas! \nTempo de jogo: ${minutos} min e ${segundos} segundos`);
+        teste++;
+        clearTimeout(timeout);
+    let resposta = prompt("Você quer jogar novamente?")
+    if(resposta == 'sim'){
+        location.reload();
+    
+    } else if(resposta == 'não'){
+        document.querySelector(".final").innerHTML = `<div class="jogardenovo" onclick="jogardenovo()"><p>Jogar de novo</p></div>`
+        Window.close();
+        } else {
+        resposta = prompt("Responda sim ou não")    
+        }
     }
 }
 
 function cronometro() {
-    document.querySelector(".cronometro").innerHTML = `Timer: ${contador} s</div>`;
-    contador++;
+    if (segundos > 59) {
+        minutos++;
+        segundos=0;
+    }
+    
+    
+    if (minutos==0) {
+    document.querySelector(".cronometro").innerHTML = `Timer: ${segundos} seg</div>`;
+    segundos++;
     timeout = setTimeout(cronometro, 1000);
+    }
+
+    if (minutos>0) {
+    document.querySelector(".cronometro").innerHTML = `Timer: ${minutos}min e ${segundos} s</div>`;
+    segundos++;
+    timeout = setTimeout(cronometro, 1000);
+    }
   }
 
-  function stopCount() {
-    clearTimeout(timeout);
-}
+  function jogardenovo() {
+    location.reload();
+  }
